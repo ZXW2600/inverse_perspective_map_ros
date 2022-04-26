@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(image_to_pointcloud)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++14 -fopenmp -o3)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -12,12 +12,23 @@ cv_bridge image_transport message_generation sensor_msgs
 roscpp
 pcl_conversions
 pcl_ros
-tf 
+  tf2
+  tf2_bullet
+  tf2_eigen
+  tf2_geometry_msgs
+  tf2_kdl
+  tf2_msgs
+  tf2_py
+  tf2_ros
+  tf2_sensor_msgs
+  tf2_tools
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
+find_package(PCL  REQUIRED )
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -147,7 +158,7 @@ add_executable(i2p_node src/i2p_node.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(i2p_node  ${catkin_LIBRARIES}
+target_link_libraries(i2p_node  ${catkin_LIBRARIES} ${PCL_LIBRARIES}
 )
 
 #############

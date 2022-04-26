@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="image_to_pointcloud" type="i2p_node" name="i2p_node">
+        <param name="cam_link" value="front_camera_link_optical" />     
+        <param name="car_link" value="base_link" />     
+        <param name="pointcloud_topic" value="cic_points" />     
+        <param name="camera_topic" value="/prius/front_camera/image_raw" />     
+      </node>
+</launch>
